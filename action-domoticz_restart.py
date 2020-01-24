@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import time
+import subprocess
 import json
 import configparser
 import io
@@ -28,6 +30,9 @@ def intent_callback(hermes, intent_message):
     result = None
     print("{}".format(intent_name))
     if intent_name == "Redemarre":
+        subprocess.call("start python turnOFFprise2.py")
+        time.sleep( 5 )
+        subprocess.call("start python turnONprise2.py")
         result = "Pas de problème, je redémarre Domoticz sur le champ"
     if result is not None:
         hermes.publish_end_session(intent_message.session_id, result)
